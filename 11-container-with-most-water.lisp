@@ -1,0 +1,18 @@
+; -------------------------------- Container with Water 11. --------------------------------
+(defmacro next-largest-water (inc add)
+  `(progn (setf curr (* (nth ,inc height) (- right left)))
+    (setf ,inc (+ ,inc ,add))))
+
+(defun max-area (height)
+  (let ((max 0)
+        (left 0)
+        (right (- (length height) 1))
+        (curr 0))
+    (dotimes (i (length height))
+          (setf curr 0) 
+          (if (< (nth right height) (nth left height))
+              (next-largest-water right -1)
+              (next-largest-water left 1))
+          (when (< max curr)
+            (setf max curr)))
+    max))
